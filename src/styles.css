@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'ngx-toastr/toastr';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.image{
+    background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(assets/note.jpg);
+    background-size: cover;
+    height:70vh;
+}
+section{
+    height: calc(100vh - 70px);
+}
+
+.fletter {
+    color: #09c;
+    font-weight: 500;
+  }
+  

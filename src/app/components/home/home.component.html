@@ -1,0 +1,66 @@
+<header class="py-4">
+  <div class="hstack justify-content-end">
+    <button mat-raised-button (click)="AddNote()" color="primary">
+      Add Note
+    </button>
+  </div>
+  <div class="col-md-10 mx-auto my-3" *ngIf="notes.length>0">
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Search</mat-label>
+      <input matInput type="text" [(ngModel)]="searchInput" />
+      <button
+        *ngIf="searchInput"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="searchInput = ''"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+</header>
+<section>
+  <div class="row py-4 row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+    <div class="col " *ngFor="let note of notes | filter : searchInput;index as i">
+      <div class="card shadow h-100">
+            <button
+              class="position-absolute top-0 end-0 m-1"
+              mat-icon-button
+              [matMenuTriggerFor]="menu"
+              aria-label="Example icon-button with a menu"
+            >
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="setData(note)">
+                <mat-icon>edit</mat-icon>
+                <span>Edit</span>
+              </button>
+              <button [swal]="deleteSwal" mat-menu-item>
+                <mat-icon>delete</mat-icon>
+                <span>Delete</span>
+              </button>
+              <swal
+                #deleteSwal
+                title="Delete {{note.title}}?"
+                text="This cannot be undone"
+                icon="question"
+                [showCancelButton]="true"
+                [focusCancel]="true"
+                (confirm)="deleteNote(note._id,note.title,i)"
+              >
+              </swal>
+            </mat-menu>
+            <div class="card-body">
+              <h3 class="card-title h5">
+                {{ note.title }}
+              </h3>
+              <p class="text-muted small">
+                {{ note.desc }}
+              </p>
+            </div>
+      </div>
+    </div>
+  </div>
+</section>
